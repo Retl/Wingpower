@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<!--
+	Author: Carlis Moore
+	Date of Creation: 10 July 2014
+	Date of Last Update: 16 August 2014
+	Base Code: https://github.com/Retl/stable45
+	Purpose: Shoot stuff! Get points! Don't die!
+
+	Permissions: If you want to use elements from this page, please ask me first. I'm generally pretty open and willing to share, but it's better to ask than to not. You can email me at travisuped@gmail.com.  storytime@revelromp.com also works.
+
+	Memo: N/A
+	-->
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+
+	<link rel="icon" sizes="196x196" href="nice-highres.png">
+    <link rel="stylesheet" type="text/css" href="stylesheets/ia16.css" media="screen" />
+
+    <title>Intelligent Agent 16</title>
+	<script type="text/javascript" src="js/utilities.js"></script>
+	<script type="text/javascript" src="js/geometry.js"></script>
+	<script type="text/javascript" src="js/canvasdraw.js"></script>
+	<script type="text/javascript" src="js/gldraw.js"></script>
+	<script type="text/javascript" src="js/camera.js"></script>
+	
+	<script type="text/javascript" src="js/gameObject.js"></script>
+	<script type="text/javascript" src="js/balloon.js"></script>
+	<script type="text/javascript" src="js/cursor.js"></script>
+	<script type="text/javascript" src="js/snipeattack.js"></script>
+	<script type="text/javascript" src="js/burstattack.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/enemy.js"></script>
+	<script type="text/javascript" src="js/enemyChaser.js"></script>
+	<script type="text/javascript" src="js/bouncer.js"></script>
+	<script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript" src="js/ia16.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+  </head>
+
+  <body onLoad="main()">
+    <div>
+      <section id="main_content">
+		<div id="mainDiv" onmousemove="updateMousePosition(event)" >
+		<canvas onkeydown="handleKeyPress(event);" onkeyup="handleKeyRelease(event);" onmousedown="handleMouseDown(event);" onmouseup="handleMouseUp(event);" id="mainCanvas" width="800" height="600">
+			Your browser doesn't like the HTML5 Canvas element.
+		</canvas>
+		<canvas onkeydown="handleKeyPress(event);" onkeyup="handleKeyRelease(event);" onmousedown="handleMouseDown(event);" onmouseup="handleMouseUp(event);" id="mainGL" width="0" height="0">
+			Your browser doesn't like the HTML5 Canvas element.
+		</canvas>
+		<script type="text/javascript">
+		var gameWidth = document.getElementById("mainCanvas").width;
+		var gameHeight = document.getElementById("mainCanvas").height;
+		</script>
+		<!--
+		<a class="btn" onClick="if(isUserOnMobile()){document.getElementById('mainCanvas').webkitRequestFullscreen();}">Go Fullscreen</a>
+		-->
+		<!--
+		<a class="btn"  onClick="document.getElementById('bgm').pause();">Disable Music</a>
+		<audio id="bgm" autoplay="autoplay" loop="loop">
+			<source src="./audio/S45_wip2.mp3" type="audio/mp3" />
+			Your browser does not support HTML5 audio. Please consider upgrading.
+		</audio>
+		-->
+		</div>
+      </section>
+    </div>
+  </body>
+</html>
