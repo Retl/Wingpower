@@ -22,7 +22,7 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 		this.endurance = Utilities.randomIntInRange(10, 95);
 		this.condition = this.endurance;
 		this.control = Utilities.randomIntInRange(5, 95);
-		this.displayName = "Generated " + Utilities.randomIntInRange(0, 9999);
+		this.displayName = Names.random();
 		this.growth = Utilities.randomIntInRange(2, 10);
 		this.health = Utilities.randomIntInRange(50, 100);
 		this.strength = Utilities.randomIntInRange(10, 95);

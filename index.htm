@@ -21,6 +21,7 @@
 
     <title>Wing Power</title>
 	<script type="text/javascript" src="js/utilities.js"></script>
+	<script type="text/javascript" src="js/names.js"></script>
 	<script type="text/javascript" src="js/pegasus.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
   </head>
@@ -28,32 +29,42 @@
   <body onLoad="main();">
     <div>
       <section id="main_content">
-		<div id="mainDiv">
-		</div>
-        <div id="tableDiv">
-			<table id="theTable">
-				<tr>
-					<td>Name</td>
-					<td>Max Wingpower</td>
-					<td>Condition</td>
-					<td>Emdurance</td>
-					<td>Strength</td>
-					<td>Control</td>
-					<td>Growth</td>
-					<td>Recovery</td>
-					<td>Health</td>
-					
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<td>Name</td>
-					<td>Will</td>
-					<td>Condition</td>
-					<td>Speed</td>
-					
-				</tr>
-			</table>
+		  <div id="centeredDiv">
+			<div id="main">
+				Now loading..<br />
+			</div>
+			<div id="tableDiv" class="centerTable">
+				<form onsubmit="updateTable();">
+					<button name="nextPage" onClick="goToPrevPage();" value="nextPage">Next Page</button>
+					<input type="text" size="3" name="page" value="1">
+					<input type="text" size="3" name="perPage" value="20">
+					<input type="text" size="3" name="numPages" value="5" readonly>
+					<button name="nextPage" onClick="goToNextPage();" value="nextPage">Next Page</button>
+				</form>
+				<table id="theTable">
+					<tr>
+						<td>Name</td>
+						<td>Max Wingpower</td>
+						<td>Condition</td>
+						<td>Emdurance</td>
+						<td>Strength</td>
+						<td>Control</td>
+						<td>Growth</td>
+						<td>Recovery</td>
+						<td>Health</td>
+
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td>Name</td>
+						<td>Will</td>
+						<td>Condition</td>
+						<td>Speed</td>
+
+					</tr>
+				</table>
+			</div>
 		</div>
       </section>
     </div>

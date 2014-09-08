@@ -2,8 +2,8 @@
 {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 12pt;
-	color: #fab3d1;
-	text-shadow: 0 0 6px #fab3d1;
+	color: #B3BCFA;
+	text-shadow: 0 0 6px #B3B6FA;
 	text-align: center;
 }
 
@@ -33,31 +33,24 @@ ul
 #input
 {
 	text-align: center;
+	/*margin: 0px auto;*/
 }
 
 button
 {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 120%;
-	width: 15%;
-	height: 64px;
+	width: auto;
+	height: auto;
 	border-radius: 16px;
 	
-	color: #fdf6ae;
+	color: #FFFFFF;
 	text-shadow: 0 0 10px #fdf6ae;
 	
 	/* Generated via http://www.colorzilla.com/gradient-editor/ - Moore. */
-	background: #edb7e0; /* Old browsers */
-	background: -moz-linear-gradient(top, #edb7e0 0%, #f37dd7 35%, #f75dd3 37%, #edb7e0 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#edb7e0), color-stop(35%,#f37dd7), color-stop(37%,#f75dd3), color-stop(100%,#edb7e0)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #edb7e0 0%,#f37dd7 35%,#f75dd3 37%,#edb7e0 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #edb7e0 0%,#f37dd7 35%,#f75dd3 37%,#edb7e0 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #edb7e0 0%,#f37dd7 35%,#f75dd3 37%,#edb7e0 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #edb7e0 0%,#f37dd7 35%,#f75dd3 37%,#edb7e0 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#edb7e0', endColorstr='#edb7e0',GradientType=0 ); /* IE6-9 */
-	/* End of generated CSS. - Moore. */
 	
-	border-color: #edb7e0;
+	background: #202C85; /* Old browsers */
+	border-color: #B7C2ED;
 }
 
 body
@@ -75,9 +68,11 @@ body
 
 .naviconShelf
 {
+	/*
 	background-image: url('../img/common-menu.png');
 	background-position: center;
 	background-size: 100% 100%;
+	*/
 	
 	width: 45px;
 	height: 45px;
@@ -168,10 +163,12 @@ body
 
 #main
 {	
-	background-color: #300a24;
-	background-image: url('../img/terminaltexture_pink_by_team_machine.jpg'); 
+	background-color: #0F0A30;
+	/*
+	background-image: url('../img/terminaltexture_pink_by_team_machine.jpg'); */
 	/*The above background image is a modified version of Fallout Terminal Texture by team-machine on deviantArt.com. http://fav.me/d5cubxx*/
-	background-size: 100% 100%;
+	/*background-size: 100% 100%;*/
+	
 	
 	height: 385px;
 	width: 610px;
@@ -191,3 +188,41 @@ body
 	margin-left: 10%;
 	margin-right: 10%;
 }
+
+#tableDiv
+{
+	
+}
+
+.centerTable
+{
+	background-color: #0F0A30;
+	/*background-image: url('../img/terminaltexture_pink_by_team_machine.jpg'); */
+	/*The above background image is a modified version of Fallout Terminal Texture by team-machine on deviantArt.com. http://fav.me/d5cubxx*/
+	/*background-size: 100% 100%;*/
+	
+	height: 385px;
+	width: 800px;
+	padding: 16px 32px 16px 32px; /*Top Right Bottom Left*/
+	overflow: auto;
+	margin:0 auto;
+	
+	border: 2px solid;
+	border-radius: 5px;
+	
+	text-align: left;
+}
+
+.centerTable tr td:first-child
+{
+	text-align:left;
+}
+
+.centerTable tr:nth-child(even) 
+{
+	background: #140D3F;
+}
+
+.centerTable tr:nth-child(odd) 
+{
+	background: #203577;}
