@@ -39,6 +39,10 @@ function main ()
         team[i] = new pegasus();
         team[i].generate();
     }
+	//Sort the team by Wingpower, greatest to least.
+	team.sort(function (a, b) {return b.maxSpeed - a.maxSpeed;});
+	
+	
 	Utilities.write( team.length + " found eligable.");
 	
 	Utilities.write("Populating pegasai roster.");
@@ -90,6 +94,13 @@ function generateTable(inputArray, pageNumber, numRowsToGen)
 		}
 		Utilities.write("No entries to view. Jumping back to page "+ newPage +".");
 	}
+	
+	//Update the values displayed on the page.
+	txt_page.value = 1;
+	txt_perPage.value = numRowsToGen;
+	maxPage = Math.ceil( team.length / numRowsToGen);
+	txt_numPages.value = maxPage;
+	
 	var table = "<table>\n"
 	table += tableHeaderString;
 	if (Utilities.isDefined(inputArray) && Utilities.isArray(inputArray))
