@@ -13,8 +13,9 @@ function hurricane(control, duress, momentum, power, state)
     
     this.decay = function()
 	{
-        this.power /= 2;
-		this.power -= team.length;
+        this.power /= team.length;
+		//this.power -= team.length * 5;
+		this.power = Math.max(this.power, 0);
 	};
     
     this.fullRound = function(theTeam)
