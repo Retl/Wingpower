@@ -102,6 +102,12 @@ Utilities.isDefined = function (input)
 	return result;
 };
 
+Utilities.defaultIfNotNumber = function (inValue, defaultValue)
+{
+	Utilities.isNumber(defaultValue)? defaultValue : 0;
+	return Utilities.isNumber(inValue)? inValue : defaultValue;
+}
+
 
 Utilities.clamp = function (val, min, max)
 {
