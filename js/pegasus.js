@@ -34,6 +34,25 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 		this.wingPower = 0;
 	};
 	
+	this.fly = function()
+	{
+		var result;
+		//Spend Condition to speed up.
+		this.condition = Utilities.clamp(this.condition - this.strength, 0, this.endurance);
+		
+		//If you are able to fly, speed up. Consider replacing this.strenth addition with addition of however much strength is available form condition.
+		if (this.strength >= this.condition)
+		{
+			this.wingPower = Utilities.clamp(this.wingPower + this.strength, 0, this.maxSpeed);
+		}
+		
+		
+		this.condition += this.recovery;
+		
+		result = this.wingPower;
+		return result;
+	};
+	
 	this.draw = function()
 	{
 	/*
@@ -42,7 +61,7 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 			CanvasDraw.drawPolygon(this.x, this.y, Geometry.circle(this.radius * 2, 8));
 		}
 		*/
-	}
+	};
 	
 	
 };

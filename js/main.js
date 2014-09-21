@@ -19,6 +19,8 @@ var currentPage;
 var maxPage;
 var t;
 var team;
+var theHurricane;
+var hurricaneInterval = setInterval("theHurricane.fullRound(team); Utilities.write('Current Hurricane Power: ' + theHurricane.power); updateTable();", 3 * 1000);
 
 function main ()
 {
@@ -54,6 +56,8 @@ function main ()
 	//Update the roster table info stuff.
 	maxPage = Math.ceil( team.length / Number.parseInt(txt_perPage.value));
 	txt_numPages.value = maxPage;
+	
+	theHurricane = new hurricane();
 	
 };
 
@@ -117,6 +121,7 @@ function generateTable(inputArray, pageNumber, numRowsToGen)
 
 function updateTable()
 {
+	t.innerHTML = generateTable(team, currentPage, Number.parseInt(txt_perPage.value));
 	return false;
 };
 
