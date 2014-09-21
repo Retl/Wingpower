@@ -17,6 +17,8 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 	this.will = Utilities.isNumber(wil)? wil : 0;
 	this.wingPower = 0;
 	
+	this.downed = false;
+	
 	this.generate = function()
 	{
 		this.endurance = Utilities.randomIntInRange(10, 95);
@@ -37,17 +39,35 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 	this.fly = function()
 	{
 		var result;
-		//Spend Condition to speed up.
-		this.condition = Utilities.clamp(this.condition - this.strength, 0, this.endurance);
-		
-		//If you are able to fly, speed up. Consider replacing this.strenth addition with addition of however much strength is available form condition.
-		if (this.strength >= this.condition)
+		if (!this.downed)
 		{
-			this.wingPower = Utilities.clamp(this.wingPower + this.strength, 0, this.maxSpeed);
+			//Spend Condition to speed up.
+			this.condition = Utilities.clamp(this.condition - this.strength, 0, this.endurance);
+
+			//If you are able to fly, speed up. Consider replacing this.strenth addition with addition of however much strength is available form condition.
+			if (this.strength >= this.condition)
+			{
+				this.wingPower = Utilities.clamp(this.wingPower + Math.min(this.condition, this.strength), 0, this.maxSpeed);
+			}
+		}
+		else
+		{
+			if (this.condition >= this.endurance) 
+			{
+				this.downed = false; 
+				//Utilities.write(this.displayName + " returns to flight.");
+			}
 		}
 		
+		if (this.condition <= 0) 
+		{
+			this.downed = true; 
+			this.wingPower = 0;
+			//Utilities.write(this.displayName + " needs to recover.");
+		}
 		
-		this.condition += this.recovery;
+		//Recover, whether downed or not.
+		this.condition = Utilities.clamp(this.condition + this.recovery, this.condition, this.endurance);
 		
 		result = this.wingPower;
 		return result;
