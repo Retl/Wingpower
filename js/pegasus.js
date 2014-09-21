@@ -85,3 +85,55 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 	
 	
 };
+
+var Roster = {};
+
+Roster.list = [];
+
+Roster.add = function (newPeg)
+{
+	result = false;
+	if (newPeg.constructor == pegasus)
+	{
+		result = true;
+		Roster.list.push(newPeg);
+	}
+	return result;
+};
+
+Roster.addGeneratedPegasus = function (numPegs)
+{
+	numPegs = Utilities.isNumber(numPegs)? Math.max(numPegs, 1) : 1;
+	for (; numPegs > 0; numPegs--)
+    {
+        var newPeg = new pegasus();
+        newPeg.generate();
+		Roster.add(newPeg);
+    }
+};
+
+Roster.addDefaultPegasai = function ()
+{
+	//Roster.list.push(new pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil));
+	Roster.list.push(new pegasus("RDash", 60, 79, 1, 99, 75, 80, 79, 99));
+	Roster.list.push(new pegasus("Radiant Star", 55, 69, 8, 96, 65, 70, 80, 60));
+};
+
+Roster.getTeam = function (numPegs)
+{
+	result = [];
+	var copy = Roster.list.slice();
+	numPegs = Utilities.isNumber(numPegs)? Math.max(numPegs, 1) : 1;
+	for (; numPegs > 0 && copy.length > 0; numPegs--)
+    {
+		//Pick one from the copy at random, push it into the results, and remove it from the copy.
+        result.push(copy.splice(Utilities.randomIntInRange(0, copy.length), 1));
+    }
+	
+	return result;
+};
+
+Roster.getAll = function (numPegs)
+{
+	return Roster.list.slice();
+};

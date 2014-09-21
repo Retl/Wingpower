@@ -36,11 +36,9 @@ function main ()
 	Utilities.write("Done.");
     
     Utilities.write("Searching local area for eligable pegasai...");
-    for (var i = Utilities.randomIntInRange(90, 120); i >= 0; i--)
-    {
-        team[i] = new pegasus();
-        team[i].generate();
-    }
+    Roster.addDefaultPegasai();
+    Roster.addGeneratedPegasus(Utilities.randomIntInRange(90, 120));
+	team = Roster.getAll();
 	//Sort the team by Wingpower, greatest to least.
 	team.sort(function (a, b) {return b.maxSpeed - a.maxSpeed;});
 	

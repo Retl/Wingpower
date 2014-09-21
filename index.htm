@@ -36,7 +36,10 @@
 			</div>
 			<div id="tableDiv" class="centerTable">
 				<form onsubmit="updateTable();">
-					<button name="prevPage" type="button" onClick="goToPrevPage();" value="nextPage">Prev. Page</button>
+					<button name="squadView" type="button" onClick="goToPrevPage();">Overview</button>
+					<button name="squadView" type="button" onClick="goToPrevPage();"disabled>Squad View</button>
+					<br />
+					<button name="prevPage" type="button" onClick="goToPrevPage();" value="prevPage">Prev. Page</button>
 					<input type="text" size="3" name="page" value="1">
 					<input type="text" size="3" name="perPage" value="15">
 					<input type="text" size="3" name="numPages" value="5" readonly>
