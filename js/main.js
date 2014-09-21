@@ -20,7 +20,7 @@ var maxPage;
 var t;
 var team;
 var theHurricane;
-var hurricaneInterval = setInterval("theHurricane.fullRound(team); Utilities.write('Current Hurricane Power: ' + theHurricane.power); updateTable();", 3 * 1000);
+var hurricaneInterval = setInterval("theHurricane.fullRound(team); Utilities.write('Current Hurricane Power: ' + Math.floor(theHurricane.power)); updateTable();", 1 * 1000);
 
 function main ()
 {
