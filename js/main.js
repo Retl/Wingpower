@@ -28,6 +28,8 @@ var timestamps = [];
 var windpowers = [];
 var maxDataPoints = 1600;
 
+var lineChartData;
+
 function addDataPoint(d, ts)
 {
 	timestamps.push(ts);
@@ -45,9 +47,12 @@ function hurricaneIntervalHandler ()
 	theHurricane.fullRound(team);
 	var asdf = new Date();
 	var timestamp = new Date().toLocaleTimeString();
-	Utilities.write(timestamp + ' - Current Hurricane Power: ' + Math.floor(theHurricane.power));
-	addDataPoint(Math.floor(theHurricane.power), timestamp);
+	//Utilities.write(timestamp + ' - Current Hurricane Power: ' + Math.floor(theHurricane.power));
+	//addDataPoint(Math.floor(theHurricane.power), asdf.getSeconds());
 	updateTable();
+	if (window.myLine.datasets[0].points.length > 20) {window.myLine.removeData();}
+	window.myLine.addData([Math.floor(theHurricane.power)], timestamp);
+	//window.myLine.update();
 };
 
 function main ()
@@ -84,6 +89,46 @@ function main ()
 	txt_numPages.value = maxPage;
 	
 	theHurricane = new hurricane();
+	
+	/*
+	var lineChartData = {};
+	lineChartData.labels = timestamps;
+	lineChartData.dataSets = [
+		{
+			label: "My First dataset",
+			fillColor : "rgba(220,220,220,0.2)",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(220,220,220,1)",
+			pointStrokeColor : "#fff",
+			pointHighlightFill : "#fff",
+			pointHighlightStroke : "rgba(220,220,220,1)",
+			data : windpowers
+		}
+	];
+	*/
+	lineChartData = {
+		labels : timestamps,
+		datasets : [
+			{
+				label: "My First dataset",
+				fillColor : "rgba(220,220,220,0.2)",
+				strokeColor : "rgba(220,220,220,1)",
+				pointColor : "rgba(220,220,220,1)",
+				pointStrokeColor : "#fff",
+				pointHighlightFill : "#fff",
+				pointHighlightStroke : "rgba(220,220,220,1)",
+				data : windpowers
+			}
+		]
+
+	}
+	
+	
+	var ctx = document.getElementById("canvas").getContext("2d");
+	window.myLine = new Chart(ctx).Line(lineChartData, {
+		bezierCurve : false, datasetFill : false, 
+		animationSteps: 10
+	});
 	
 };
 

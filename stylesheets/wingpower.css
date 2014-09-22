@@ -161,6 +161,11 @@ body
 	overflow-y: auto;
 }
 
+#chart
+{
+	display: inline-block;
+}
+
 #main
 {	
 	background-color: #0F0A30;
@@ -171,7 +176,7 @@ body
 	
 	
 	height: 385px;
-	width: 610px;
+	width: 500px;
 	padding: 16px 32px 16px 32px; /*Top Right Bottom Left*/
 	overflow: auto;
 	margin:0 auto;
@@ -180,6 +185,8 @@ body
 	border-radius: 5px;
 	
 	text-align: left;
+	
+	display: inline-block;
 }
 
 #centeredDiv
@@ -187,6 +194,7 @@ body
 	width: 80%;
 	margin-left: 10%;
 	margin-right: 10%;
+	display: inline-block;
 }
 
 #tableDiv
