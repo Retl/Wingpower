@@ -25,15 +25,31 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 		this.condition = this.endurance;
 		this.control = Utilities.randomIntInRange(5, 95);
 		this.displayName = Names.random();
-		this.growth = Utilities.randomIntInRange(2, 10);
+		this.growth = Utilities.randomIntInRangeExploding(2, 4);
 		this.health = Utilities.randomIntInRange(50, 100);
-		this.strength = Utilities.randomIntInRange(10, 80);
-		this.recovery = Utilities.randomIntInRange(Utilities.clamp(this.strength - 30, 2, 100), Utilities.clamp(this.strength - 5, 2, 100));
-		this.maxSpeed = Utilities.randomIntInRange(this.strength, 80);
+		this.strength = Utilities.randomIntInRange(1, 7);
+		this.recovery = Utilities.randomIntInRange(Utilities.clamp(this.strength - 3, 2, 100), Utilities.clamp(this.strength - 1, 2, 100));
+		this.maxSpeed = Utilities.randomIntInRangeExploding(this.strength, this.strength * 2);
 		this.speed = 0;
 		
 		this.will = Utilities.randomIntInRange(1, 100);
 		this.wingPower = 0;
+	};
+	
+	this.regain = function (scalar)
+	{
+		scalar = Utilities.defaultIfNotNumber(scalar, 1);
+		this.condition = Utilities.clamp(this.condition + (this.recovery * scalar / 20), this.condition, this.endurance);
+	};
+	
+	this.trait = function()
+	{
+		return false;
+	};
+	
+	this.traitCondition = function()
+	{
+		return false;
 	};
 	
 	this.fly = function()
@@ -42,16 +58,17 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 		if (!this.downed)
 		{
 			//Spend Condition to speed up.
-			this.condition = Utilities.clamp(this.condition - this.strength, 0, this.endurance);
+			this.condition = Utilities.clamp(this.condition - (this.strength / 20), 0, this.endurance);
 
 			//If you are able to fly, speed up. Consider replacing this.strenth addition with addition of however much strength is available form condition.
-			if (this.strength >= this.condition)
+			if (this.condition > 0)
 			{
-				this.wingPower = Utilities.clamp(this.wingPower + Math.min(this.condition, this.strength), 0, this.maxSpeed);
+				this.wingPower = Utilities.clamp(this.wingPower + Math.min(this.condition, this.strength / 20), 0, this.maxSpeed);
 			}
 		}
 		else
 		{
+			//this.regain(); //Allows regain only when grounded.
 			if (this.condition >= this.endurance) 
 			{
 				this.downed = false; 
@@ -67,7 +84,8 @@ function pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil)
 		}
 		
 		//Recover, whether downed or not.
-		this.condition = Utilities.clamp(this.condition + this.recovery, this.condition, this.endurance);
+		this.regain();
+		//this.condition = Utilities.clamp(this.condition + (this.recovery / 100 * this.endurance), this.condition, this.endurance); - Percentile based recovery.
 		
 		result = this.wingPower;
 		return result;
@@ -119,15 +137,13 @@ Roster.specialToWingpower = function (s, p, e, c, i, a, l)
 	a = Utilities.defaultIfNotNumber(a, 1);
 	l = Utilities.defaultIfNotNumber(l, 1);
 	
-	//Roster.list.push(new pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil));
-	
 	var cont = (s/10 * 90 + 5);
 	var endu = (e/10 * 85 + 10);
-	var grow = l;
+	var grow = (l);
 	var heal = (e/10 * 50 + 50);
-	var reco = (e/10 * 85 + 10);
-	var maxs = (a/10 * 85 + 10);
-	var stre = (s/10 * 70 + 10);
+	var stre = s/10 * 19 + 1;
+	var reco = Utilities.randomIntInRange(Utilities.clamp(stre - 6, 2, 100), Utilities.clamp(stre - 1, 2, 100));
+	var maxs = (a/10 * 16.5 + 1);
 	var wil = (c * 10);
 	
 	result.push(cont);
@@ -138,29 +154,15 @@ Roster.specialToWingpower = function (s, p, e, c, i, a, l)
 	result.push(maxs);
 	result.push(stre);
 	result.push(wil);
-	
-	
-	/*
-	this.endurance = Utilities.randomIntInRange(10, 95);
-	this.condition = this.endurance;
-	this.control = Utilities.randomIntInRange(5, 95);
-	this.displayName = Names.random();
-	this.growth = Utilities.randomIntInRange(2, 10);
-	this.health = Utilities.randomIntInRange(50, 100);
-	this.strength = Utilities.randomIntInRange(10, 80);
-	this.recovery = Utilities.randomIntInRange(Utilities.clamp(this.strength - 30, 2, 100), Utilities.clamp(this.strength - 5, 2, 100));
-	this.maxSpeed = Utilities.randomIntInRange(this.strength, 80);
-	this.speed = 0;
-
-	this.will = Utilities.randomIntInRange(1, 100);
-	this.wingPower = 0;
-	*/
 	return result;
 };
 Roster.addDefaultPegasai = function ()
 {
 	//Roster.list.push(new pegasus(dispn, cont, endu, grow, heal, reco, maxs, stre, wil));
-	Roster.list.push(new pegasus("RDash", 60, 79, 1, 99, 75, 80, 79, 99));
+	Roster.add(new pegasus("RDash", 60, 79, 1, 99, 20, 16.5, 16.5, 99));
+	Roster.add(new pegasus("Phobiashy", 20, 20, 1, 99, 0.5, 0.5, 0.5, 20));
+	Roster.add(new pegasus("Thunderlane", 53.69, 50, 3, 60, 4, 9.3, 7, 60));
+	
 	
 	
 	Roster.addConvertedFoEPegasus("Radiant Star", 8, 4, 6, 6, 5, 7, 8);
@@ -186,3 +188,9 @@ Roster.getAll = function (numPegs)
 {
 	return Roster.list.slice();
 };
+
+//Record: Fillydelphia at 910wp. Minimum is 800wp.
+// 8 were sick.
+//TL's rating: 9.3wp, ???: 8.7, 9.2, 9.7, 9.9, Tree:0.5->2.3->Max:3.0->Desperation:16.5
+// Shadowy looking guy: 11.0
+//Target average: 1.00wp; Meaning if she expects 1000.00wp, she has about 100 pegasai to work with.

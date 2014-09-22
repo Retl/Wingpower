@@ -24,6 +24,21 @@ Utilities.randomIntInRange = function(min, max)
 	return Math.floor((Math.random() * range) + min);
 };
 
+Utilities.randomIntInRangeExploding = function(min, max)
+{
+	//This is an inclusive range. - Moore.
+	var range = Math.abs(max - min) + 1;
+	var roll = Math.floor((Math.random() * range) + min);
+	var result = roll;
+	while (roll == max)
+	{
+		//console.log("BOOM BABY! " + roll);
+		roll = Math.floor((Math.random() * range) + min);
+		result += Math.floor((Math.random() * range) + min);
+	}
+	return result;
+};
+
 Utilities.randomInArray = function(a)
 {
 	return Utilities.RandomIntInRange(0, a.length - 1);
@@ -171,6 +186,43 @@ Utilities.lerp = function (x1, y1, x2, y2, ratio)
 	result.y = y;
 	
 	return result;
+};
+
+//Timing.
+Utilities.Stopwatch = {};
+Utilities.Stopwatch.dt = 0;
+Utilities.Stopwatch.elapsed = 0;
+Utilities.Stopwatch.time = 0;
+Utilities.Stopwatch.previousTime = 0;
+
+Utilities.Stopwatch.resume = function ()
+{
+	Utilities.Stopwatch.time = Date.now();
+	Utilities.Stopwatch.previousTime = Date.now();
+	Utilities.Stopwatch.dt = 0;
+	clearInterval(Utilities.Stopwatch.interval); //Always clear beforehand to prevent making an unreachable interval.
+	Utilities.Stopwatch.interval = setInterval("Utilities.Stopwatch.update();", 1000 / 60);
+};
+
+Utilities.Stopwatch.start = function ()
+{
+	Utilities.Stopwatch.resume();
+	Utilities.Stopwatch.elapsed = 0;
+};
+
+Utilities.Stopwatch.update = function ()
+{
+	//Update the timer.
+	Utilities.Stopwatch.time = Date.now();
+	Utilities.Stopwatch.dt = (Utilities.Stopwatch.time - Utilities.Stopwatch.previousTime) / 1000.0;
+	Utilities.Stopwatch.elapsed += Utilities.Stopwatch.dt;
+	Utilities.Stopwatch.previousTime = Utilities.Stopwatch.time;
+};
+
+Utilities.Stopwatch.stop = function ()
+{
+	clearInterval(Utilities.Stopwatch.interval);
+	Utilities.Stopwatch.dt = 0;
 };
 
 //Generating HTML.

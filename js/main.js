@@ -3,6 +3,7 @@ var team = [];
 var tableHeaderString = "<tr>\
 	\n\t<td>Name</td>\
 	\n\t<td>Max Wingpower</td>\
+	\n\t<td>Wingpower</td>\
 	\n\t<td>Condition</td>\
 	\n\t<td>Endurance</td>\
 	\n\t<td>Strength</td>\
@@ -20,7 +21,7 @@ var maxPage;
 var t;
 var team;
 var theHurricane;
-var hurricaneInterval = setInterval("theHurricane.fullRound(team); Utilities.write('Current Hurricane Power: ' + Math.floor(theHurricane.power)); updateTable();", 1 * 1000);
+var hurricaneInterval = setInterval("theHurricane.fullRound(team); Utilities.write('Current Hurricane Power: ' + Math.floor(theHurricane.power)); updateTable();", .15 * 1000);
 
 function main ()
 {
@@ -66,6 +67,11 @@ function generateTableRow(inputArray)
 	{
 		for (var i = 0; i < inputArray.length; i++)
 		{
+			//Do not display decimals.
+			if (Utilities.isNumber(inputArray[i]))
+			{
+				inputArray[i] = inputArray[i].toFixed(2);
+			}
 			tableRow += "\t" + Utilities.generateTableData(inputArray[i]) + "\n";
 		}
 	}
@@ -110,7 +116,8 @@ function generateTable(inputArray, pageNumber, numRowsToGen)
 		//Create a table row for every team member's stats/'
 		for (var p = offset; p < offset + numRowsToGen && p < team.length; p++)
 		{
-			table += generateTableRow([team[p].displayName, team[p].maxSpeed, team[p].condition, team[p].endurance, team[p].strength, team[p].control, team[p].growth, team[p].recovery, team[p].health]);
+			//This is where you put the arguments you want displayed.
+			table += generateTableRow([team[p].displayName, team[p].maxSpeed, team[p].wingPower, team[p].condition, team[p].endurance, team[p].strength, team[p].control, team[p].growth, team[p].recovery, team[p].health]);
 		}
 	}
 	table += "</table>";
