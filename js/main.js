@@ -21,7 +21,34 @@ var maxPage;
 var t;
 var team;
 var theHurricane;
-var hurricaneInterval = setInterval("theHurricane.fullRound(team); Utilities.write('Current Hurricane Power: ' + Math.floor(theHurricane.power)); updateTable();", .15 * 1000);
+var hurricaneInterval = setInterval(hurricaneIntervalHandler, .15 * 1000);
+
+//For charting
+var timestamps = [];
+var windpowers = [];
+var maxDataPoints = 1600;
+
+function addDataPoint(d, ts)
+{
+	timestamps.push(ts);
+	windpowers.push(d);
+	
+	if (ts.length > maxDataPoints || windpowers.length > maxDataPoints)
+	{
+		timestamps.splice(0,1);
+		windpowers.splice(0,1);
+	}
+};
+
+function hurricaneIntervalHandler ()
+{
+	theHurricane.fullRound(team);
+	var asdf = new Date();
+	var timestamp = new Date().toLocaleTimeString();
+	Utilities.write(timestamp + ' - Current Hurricane Power: ' + Math.floor(theHurricane.power));
+	addDataPoint(Math.floor(theHurricane.power), timestamp);
+	updateTable();
+};
 
 function main ()
 {
